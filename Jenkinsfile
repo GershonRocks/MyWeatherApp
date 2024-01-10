@@ -11,7 +11,36 @@ pipeline {
     }
 
     stages {
-        
+
+        stage('Install AWS CLI') {
+            steps {
+                script {
+                    // Check if AWS CLI is installed and install if not
+                    sh '''
+                        if ! type "aws" > /dev/null; then
+                            rm -f awscliv2.zip*
+                            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+                            unzip awscliv2.zip
+                            sudo ./aws/install
+                        fi
+                        aws --version
+                    '''
+                }
+            }
+        }
+
+        stage('Configure AWS CLI') {
+            steps {
+                script {
+                    // Configure AWS CLI using environment variables
+                    sh '''
+                        aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+                        aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+                        aws configure set default.region $AWS_DEFAULT_REGION
+                    '''
+                }
+            }
+        }        
 
         stage('Replace API Key Placeholder') {
             steps {          
