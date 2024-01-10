@@ -19,6 +19,15 @@ resource "aws_iam_role" "lambda_role" {
   })
 }
 
+resource "aws_s3_bucket" "my_weather_app_bucket" {
+    bucket = "your_s3_bucket_name"
+
+    tags = {
+        Name        = "My Weather App Bucket"
+        Environment = "Development"
+    }
+}
+
 resource "aws_lambda_function" "my_weather_app" {
   function_name = "MyWeatherApp"
   role          = aws_iam_role.lambda_role.arn
@@ -30,3 +39,5 @@ resource "aws_lambda_function" "my_weather_app" {
   handler = "handler.js" // Update with the actual handler
   runtime = "nodejs20.x"    // Update with the actual Node.js runtime version
 }
+
+
