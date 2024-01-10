@@ -74,8 +74,7 @@ pipeline {
                     . ~/.nvm/nvm.sh &>/dev/null
                     nvm install 20.11.0 &>/dev/null
                     nvm use 20.11.0 &>/dev/null
-                    npm install
-                    npm install -g serverless
+                    rm -fr node_modules
                 '''
             }
         }
