@@ -23,9 +23,9 @@ resource "aws_lambda_function" "my_weather_app" {
   function_name = "MyWeatherApp"
   role          = aws_iam_role.lambda_role.arn
 
-  // Assuming the code is zipped and uploaded to an S3 bucket
-  s3_bucket = "your_s3_bucket_name"
-  s3_key    = "your_s3_key.zip"
+#   // Assuming the code is zipped and uploaded to an S3 bucket
+#   s3_bucket = "your_s3_bucket_name"
+#   s3_key    = "your_s3_key.zip"
 
   handler = "handler.js" // Update with the actual handler
   runtime = "nodejs20.x"    // Update with the actual Node.js runtime version
