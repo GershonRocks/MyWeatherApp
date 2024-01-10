@@ -66,6 +66,14 @@ pipeline {
             }
         }
 
+        stage('Cleanup') {
+            steps {
+                sh '''#!/bin/bash
+                terraform destroy -auto-approve
+                '''
+            }
+        }
+
         stage('Install NVM and Setup Node.js') {
             steps {
                 sh '''#!/bin/bash
@@ -136,6 +144,14 @@ pipeline {
             steps {
                 sh '''#!/bin/bash
                 terraform apply -target=aws_api_gateway_rest_api.api -auto-approve
+                '''
+            }
+        }
+
+        stage('Cleanup') {
+            steps {
+                sh '''#!/bin/bash
+                terraform destroy -auto-approve
                 '''
             }
         }
