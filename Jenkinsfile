@@ -105,7 +105,7 @@ pipeline {
         stage('Deploy to AWS Lambda') {
             steps {
                 sh '''#!/bin/bash
-                serverless deploy
+                npx serverless deploy
                 '''
             }
         }
