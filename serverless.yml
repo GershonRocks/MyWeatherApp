@@ -1,0 +1,15 @@
+service: weather-app
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  environment:
+    OPENWEATHER_API_KEY: OPENWEATHER_API_KEY_REPLACE_ME
+
+functions:
+  weather:
+    handler: handler.handler
+    events:
+      - http:
+          path: weather
+          method: get
