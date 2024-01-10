@@ -4,8 +4,8 @@ pipeline {
     environment {
         AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
-        S3_BUCKET_NAME        = 'your-s3-bucket-name' // Replace with your bucket name
-        S3_SECRET_KEY_ZIP     = 'MyWeatherApp.zip'    // Replace with your zip file name
+        S3_BUCKET_NAME        = credentials('my-secret-s3-bucket-name') // Replace with your bucket name
+        S3_SECRET_KEY_ZIP     = credentials('s3-secret-key-zip')   // Replace with your zip file name
         OPENWEATHER_API_KEY   = credentials('OPENWEATHER_API_KEY_ID')
         AWS_DEFAULT_REGION    = 'us-east-1'
     }
