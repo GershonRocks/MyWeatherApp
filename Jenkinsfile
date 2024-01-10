@@ -4,8 +4,10 @@ pipeline {
     environment {
         AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
+        S3_BUCKET_NAME = credentials('my-secret-s3-bucket-name')
+        S3_SECRET_KEY_ZIP = credentials('s3-secret-key-zip	')
         OPENWEATHER_API_KEY = credentials('OPENWEATHER_API_KEY_ID')
-        AWS_DEFAULT_REGION    = 'us-east-1'
+        AWS_DEFAULT_REGION    = 'us-east-1' 
     }
 
     stages {
@@ -16,6 +18,8 @@ pipeline {
                 script {
                     // Using double quotes for variable expansion
                     sh "sed -i 's/OPENWEATHER_API_KEY_REPLACE_ME/${OPENWEATHER_API_KEY}/' serverless.yml"
+                    sh "sed -i 's/your_s3_bucket_name/${S3_BUCKET_NAME}/' main.tf"
+                    sh "sed -i 's/your_s3_key.zip/${S3_SECRET_KEY_ZIP}/' main.tf"
                 }   
             }
         }
