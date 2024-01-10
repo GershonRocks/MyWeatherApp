@@ -81,47 +81,47 @@ pipeline {
             }
         }
 
-        stage('Apply Terraform Infrastructure') {
-            steps {
-                sh 'terraform apply -auto-approve'
-            }
-        }
+        // stage('Apply Terraform Infrastructure') {
+        //     steps {
+        //         sh 'terraform apply -auto-approve'
+        //     }
+        // }
 
-        stage('Package Lambda Function') {
-            steps {
-                script {
-                    // Assuming all required files for Lambda are in the root directory of the project
-                    sh "zip -r ${S3_SECRET_KEY_ZIP} ."
-                }
-            }
-        }
+        // stage('Package Lambda Function') {
+        //     steps {
+        //         script {
+        //             // Assuming all required files for Lambda are in the root directory of the project
+        //             sh "zip -r ${S3_SECRET_KEY_ZIP} ."
+        //         }
+        //     }
+        // }
 
-        stage('Upload Lambda Package to S3') {
-            steps {
-                script {
-                    // Check if S3 bucket exists, create if not
-                    sh """
-                        if ! aws s3 ls "s3://${S3_BUCKET_NAME}" ; then
-                          aws s3 mb "s3://${S3_BUCKET_NAME}"
-                        fi
-                    """
-                    // Upload to S3
-                    sh "aws s3 cp ${S3_SECRET_KEY_ZIP} s3://${S3_BUCKET_NAME}/${S3_SECRET_KEY_ZIP}"
-                }
-            }
-        }
+        // stage('Upload Lambda Package to S3') {
+        //     steps {
+        //         script {
+        //             // Check if S3 bucket exists, create if not
+        //             sh """
+        //                 if ! aws s3 ls "s3://${S3_BUCKET_NAME}" ; then
+        //                   aws s3 mb "s3://${S3_BUCKET_NAME}"
+        //                 fi
+        //             """
+        //             // Upload to S3
+        //             sh "aws s3 cp ${S3_SECRET_KEY_ZIP} s3://${S3_BUCKET_NAME}/${S3_SECRET_KEY_ZIP}"
+        //         }
+        //     }
+        // }
 
-        stage('Deploy to AWS Lambda') {
-            steps {
-                sh 'serverless deploy'
-            }
-        }
+        // stage('Deploy to AWS Lambda') {
+        //     steps {
+        //         sh 'serverless deploy'
+        //     }
+        // }
 
-        stage('Create API Gateway') {
-            steps {
-                sh 'terraform apply -target=aws_api_gateway_rest_api.api -auto-approve'
-            }
-        }
+        // stage('Create API Gateway') {
+        //     steps {
+        //         sh 'terraform apply -target=aws_api_gateway_rest_api.api -auto-approve'
+        //     }
+        // }
 
         stage('Cleanup') {
             steps {
