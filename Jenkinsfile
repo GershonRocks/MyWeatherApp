@@ -71,6 +71,8 @@ pipeline {
                     . ~/.nvm/nvm.sh &>/dev/null
                     nvm install 20.11.0 &>/dev/null
                     nvm use 20.11.0 &>/dev/null
+                    npm install
+                    npm build
                 '''
             }
         }
@@ -85,10 +87,6 @@ pipeline {
             steps {
                 script {
                     // Assuming all required files for Lambda are in the root directory of the project
-                    sh '''#!/bin/bash
-                    npm install
-                    npm build
-                    '''
                     sh "zip -r ${S3_SECRET_KEY_ZIP} ."
                 }
             }
