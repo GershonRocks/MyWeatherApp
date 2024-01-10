@@ -61,8 +61,8 @@ pipeline {
                     rm -fr terraform
                     wget https://releases.hashicorp.com/terraform/1.6.6/terraform_1.6.6_linux_amd64.zip
                     unzip -f terraform_1.6.6_linux_amd64.zip
-                    chmod +x terraform
                     sudo mv terraform /usr/local/bin
+                    chmod +x /usr/local/bin/terraform
                 '''
             }
         }
