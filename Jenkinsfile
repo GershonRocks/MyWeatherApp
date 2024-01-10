@@ -20,8 +20,8 @@ pipeline {
                         if ! type "aws" > /dev/null; then
                             rm -f awscliv2.zip*
                             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-                            unzip awscliv2.zip
-                            sudo ./aws/install
+                            unzip awscliv2.zip &>/dev/null
+                            sudo ./aws/install &>/dev/null
                         fi
                         aws --version
                     '''
@@ -59,7 +59,7 @@ pipeline {
                     rm -fr $HOME/terraform/
                     rm -f *.zip*
                     wget https://releases.hashicorp.com/terraform/1.0.0/terraform_1.0.0_linux_amd64.zip
-                    unzip terraform_1.0.0_linux_amd64.zip
+                    unzip terraform_1.0.0_linux_amd64.zip  &>/dev/null
                     mkdir -p $HOME/terraform/
                     mv terraform $HOME/terraform/
                     echo "export PATH=\$PATH:\$HOME/terraform" >> $HOME/.bashrc
