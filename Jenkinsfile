@@ -57,10 +57,10 @@ pipeline {
         stage('Setup Terraform') {
             steps {
                 sh '''
-                    rm -f terraform_1.0.0_linux_amd64.zip*
+                    rm -f terraform*.zip*
                     rm -fr terraform
-                    wget https://api.github.com/repos/hashicorp/terraform/tarball/v1.6.6
-                    tar - xvfz hashicorp-terraform-v1.6.6-0-geba3240.tar.gz
+                    wget https://releases.hashicorp.com/terraform/1.6.6/terraform_1.6.6_linux_amd64.zip
+                    unzip -f terraform_1.6.6_linux_amd64.zip
                     chmod +x terraform
                     sudo mv terraform /usr/local/bin
                 '''
