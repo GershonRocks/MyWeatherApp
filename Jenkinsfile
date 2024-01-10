@@ -57,13 +57,10 @@ pipeline {
         stage('Setup Terraform') {
             steps {
                 sh '''
-                    rm -fr $HOME/terraform/
-                    rm -f *.zip*
+                    rm -f terraform_1.0.0_linux_amd64.zip*
                     wget https://releases.hashicorp.com/terraform/1.0.0/terraform_1.0.0_linux_amd64.zip
                     unzip terraform_1.0.0_linux_amd64.zip  &>/dev/null
-                    mkdir -p $HOME/terraform/
-                    mv terraform $HOME/terraform/
-                    echo "export PATH=\$PATH:\$HOME/terraform" >> $HOME/.bashrc
+                    sudo mv terraform /usr/local/bin
                 '''
             }
         }
@@ -81,17 +78,13 @@ pipeline {
 
         stage('Initialize Terraform') {
             steps {
-                sh '''#!/bin/bash
-                $HOME/terraform/terraform init
-                '''
+                sh 'terraform init'
             }
         }
 
         stage('Apply Terraform Infrastructure') {
             steps {
-                sh '''#!/bin/bash
-                $HOME/terraform/terraform apply -auto-approve
-                '''
+                sh 'terraform apply -auto-approve'
             }
         }
 
@@ -110,13 +103,13 @@ pipeline {
 
         stage('Create API Gateway') {
             steps {
-                sh '$HOME/terraform/terraform apply -target=aws_api_gateway_rest_api.api -auto-approve'
+                sh 'terraform apply -target=aws_api_gateway_rest_api.api -auto-approve'
             }
         }
 
         stage('Cleanup') {
             steps {
-                sh '$HOME/terraform/terraform destroy -auto-approve'
+                sh 'terraform destroy -auto-approve'
             }
             post {
                 always {
