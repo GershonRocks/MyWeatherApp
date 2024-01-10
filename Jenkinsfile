@@ -59,7 +59,7 @@ pipeline {
                 sh '''
                     rm -f terraform_1.0.0_linux_amd64.zip*
                     wget https://releases.hashicorp.com/terraform/1.0.0/terraform_1.0.0_linux_amd64.zip
-                    unzip terraform_1.0.0_linux_amd64.zip  &>/dev/null
+                    unzip -f terraform_1.0.0_linux_amd64.zip  &>/dev/null
                     chmod +x terraform
                     sudo mv terraform /usr/local/bin
                 '''
