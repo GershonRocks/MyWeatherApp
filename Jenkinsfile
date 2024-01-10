@@ -66,7 +66,7 @@ pipeline {
 
         stage('Install NVM and Setup Node.js') {
             steps {
-                sh '''
+                sh '''#!/bin/bash
                     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash &>/dev/null
                     . ~/.nvm/nvm.sh &>/dev/null
                     nvm install 20.11.0 &>/dev/null
@@ -86,7 +86,7 @@ pipeline {
                 script {
                     // Assuming all required files for Lambda are in the root directory of the project
                     sh '''#!/bin/bash
-                    npm insatall
+                    npm install
                     npm build
                     '''
                     sh "zip -r ${S3_SECRET_KEY_ZIP} ."
