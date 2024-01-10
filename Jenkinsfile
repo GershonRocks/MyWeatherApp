@@ -21,6 +21,7 @@ pipeline {
                             rm -fr aws
                             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
                             unzip awscliv2.zip &>/dev/null
+                            rm -f awscliv2.zip
                             sudo ./aws/install &>/dev/null
                         fi
                         aws --version
@@ -58,6 +59,7 @@ pipeline {
                     rm -fr terraform
                     wget https://releases.hashicorp.com/terraform/1.6.6/terraform_1.6.6_linux_amd64.zip
                     unzip terraform_1.6.6_linux_amd64.zip
+                    rm -f terraform_1.6.6_linux_amd64.zip
                     chmod +x terraform
                     sudo mv terraform /usr/local/bin
                 '''
@@ -68,6 +70,7 @@ pipeline {
             steps {
                 sh '''#!/bin/bash
                     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash &>/dev/null
+                    rm -f install.sh
                     . ~/.nvm/nvm.sh &>/dev/null
                     nvm install 20.11.0 &>/dev/null
                     nvm use 20.11.0 &>/dev/null
