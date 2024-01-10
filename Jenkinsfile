@@ -83,7 +83,8 @@ pipeline {
         stage('Package Lambda Function') {
             steps {
                 script {
-                    sh "rm -fr [.]*"
+                    sh "rm -fr .git"
+                    sh "rm -fr .terraform"
                     sh "rm -f *.zip"
                     // Assuming all required files for Lambda are in the root directory of the project
                     sh "zip -r ${S3_SECRET_KEY_ZIP} ."
