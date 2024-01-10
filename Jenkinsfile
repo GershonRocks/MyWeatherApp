@@ -81,16 +81,12 @@ pipeline {
             }
         }
 
-        stage('Apply Terraform Infrastructure') {
-            steps {
-                sh 'terraform apply -auto-approve'
-            }
-        }
-
         stage('Package Lambda Function') {
             steps {
                 script {
                     // Assuming all required files for Lambda are in the root directory of the project
+                    sh 'npm install'
+                    sh 'npm build'
                     sh "zip -r ${S3_SECRET_KEY_ZIP} ."
                 }
             }
@@ -114,6 +110,12 @@ pipeline {
         stage('Deploy to AWS Lambda') {
             steps {
                 sh 'serverless deploy'
+            }
+        }
+
+        stage('Apply Terraform Infrastructure') {
+            steps {
+                sh 'terraform apply -auto-approve'
             }
         }
 
