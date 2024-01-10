@@ -38,6 +38,10 @@ resource "aws_lambda_function" "my_weather_app" {
 
   handler = "handler.js" // Update with the actual handler
   runtime = "nodejs20.x"    // Update with the actual Node.js runtime version
+
+  depends_on = [
+    aws_s3_bucket.my_weather_app_bucket
+  ]
 }
 
 
