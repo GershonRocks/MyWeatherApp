@@ -2,6 +2,7 @@ service: weather-app
 
 provider:
   name: aws
+  region: us-east-1
   runtime: nodejs20.x
   environment:
     OPENWEATHER_API_KEY: OPENWEATHER_API_KEY_REPLACE_ME
