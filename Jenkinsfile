@@ -80,39 +80,51 @@ pipeline {
 
         stage('Initialize Terraform') {
             steps {
-                sh 'terraform init'
+                sh '''#!/bin/bash
+                terraform init
+                '''
             }
         }
 
         stage('Apply Terraform Infrastructure') {
             steps {
-                sh 'terraform apply -auto-approve'
+                sh '''#!/bin/bash
+                terraform apply -auto-approve
+                '''
             }
         }
 
         stage('Build NodeJS API') {
             steps {
-                sh 'npm install'
-                sh 'npm install -g serverless'
-                sh 'npm run build'
+                sh '''#!/bin/bash
+                npm install
+                npm install -g serverless
+                npm run build
+                '''
             }
         }
 
         stage('Deploy to AWS Lambda') {
             steps {
-                sh 'serverless deploy'
+                sh '''#!/bin/bash
+                serverless deploy
+                '''
             }
         }
 
         stage('Create API Gateway') {
             steps {
-                sh 'terraform apply -target=aws_api_gateway_rest_api.api -auto-approve'
+                sh '''#!/bin/bash
+                terraform apply -target=aws_api_gateway_rest_api.api -auto-approve
+                '''
             }
         }
 
         stage('Cleanup') {
             steps {
-                sh 'terraform destroy -auto-approve'
+                sh '''#!/bin/bash
+                terraform destroy -auto-approve
+                '''
             }
             post {
                 always {
