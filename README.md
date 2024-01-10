@@ -1,41 +1,53 @@
-Here's a template for a `README.md` file for your repository:
-
 ```markdown
 # MyWeatherApp
 
 ## Description
-MyWeatherApp is a simple, serverless weather-checking application designed for AWS. It allows users to fetch current weather information for different cities around the world.
+MyWeatherApp is a serverless application designed to provide real-time weather information. It's built on AWS Lambda, demonstrating a cloud-native approach to software development.
 
-## Installation
-To install the application:
+## Features
+- Fetch current weather data for any city.
+- Serverless architecture leveraging AWS Lambda.
+- Integration with OpenWeather API for weather data.
 
+## Prerequisites
+- AWS account with access to Lambda, API Gateway, and S3 services.
+- Node.js and npm installed.
+- Serverless Framework for deployment.
+
+## Installation & Setup
 1. Clone the repository:
    ```
    git clone https://github.com/GershonRocks/MyWeatherApp.git
    ```
-2. Navigate to the cloned directory and install dependencies:
+2. Navigate to the project directory and install dependencies:
    ```
+   cd MyWeatherApp
    npm install
    ```
 
-## Usage
-To use the application, run it locally or deploy it to AWS Lambda. Use the following endpoint to fetch weather data:
-```
-/weather?city={city_name}
-```
+## Configuration
+- Set up AWS credentials for Serverless deployment.
+- Configure environment variables for OpenWeather API key (`OPENWEATHER_API_KEY`).
 
 ## Deployment
-The application is designed for deployment on AWS Lambda. Follow these steps to deploy:
-1. Set up AWS credentials.
-2. Run `serverless deploy` from the command line in the project directory.
+Deploy the application using Serverless Framework:
+```
+serverless deploy
+```
+
+## Usage
+After deployment, the application can be accessed through the generated API Gateway endpoint:
+```
+https://{api_gateway_id}.execute-api.{region}.amazonaws.com/weather?city={city_name}
+```
 
 ## Contributing
-Contributions are welcome! Please read the contributing guidelines before making any changes.
-
-## Author
-Gershon Avital - shraga@tgx-group.com
+Contributions to the project are welcome. Please fork the repository and submit a pull request with your changes.
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
+
+## Author
+- Gershon Avital - shraga@tgx-group.com
 ```
 
