@@ -72,16 +72,10 @@ pipeline {
                     nvm install 20.11.0 &>/dev/null
                     nvm use 20.11.0 &>/dev/null
                     npm install
-                    npm run build
                 '''
             }
         }
 
-        stage('Initialize Terraform') {
-            steps {
-                sh 'terraform init'
-            }
-        }
 
         stage('Package Lambda Function') {
             steps {
@@ -110,6 +104,12 @@ pipeline {
         stage('Deploy to AWS Lambda') {
             steps {
                 sh 'serverless deploy'
+            }
+        }
+
+        stage('Initialize Terraform') {
+            steps {
+                sh 'terraform init'
             }
         }
 
