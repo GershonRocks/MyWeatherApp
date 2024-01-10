@@ -85,8 +85,10 @@ pipeline {
             steps {
                 script {
                     // Assuming all required files for Lambda are in the root directory of the project
-                    sh 'npm install'
-                    sh 'npm build'
+                    sh '''#!/bin/bash
+                    npm insatall
+                    npm build
+                    '''
                     sh "zip -r ${S3_SECRET_KEY_ZIP} ."
                 }
             }
