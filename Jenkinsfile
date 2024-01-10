@@ -140,17 +140,4 @@ pipeline {
             }
         }
 
-        stage('Cleanup') {
-            steps {
-                sh '''#!/bin/bash
-                terraform destroy -auto-approve
-                '''
-            }
-            post {
-                always {
-                    deleteDir()
-                }
-            }
-        }
-    }
 }
