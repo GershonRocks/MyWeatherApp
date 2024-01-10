@@ -66,7 +66,7 @@ pipeline {
             }
         }
 
-        stage('Cleanup') {
+        stage('Cleanup - Startup') {
             steps {
                 sh '''#!/bin/bash
                 terraform destroy -auto-approve
