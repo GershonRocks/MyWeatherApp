@@ -28,7 +28,7 @@ pipeline {
             steps {
                 sh '''
                     rm -fr $HOME/terraform/
-                    rm *.zip*
+                    rm -f *.zip*
                     wget https://releases.hashicorp.com/terraform/1.0.0/terraform_1.0.0_linux_amd64.zip
                     unzip terraform_1.0.0_linux_amd64.zip
                     mkdir -p $HOME/terraform/
