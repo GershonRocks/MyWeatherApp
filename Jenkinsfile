@@ -72,6 +72,7 @@ pipeline {
                     nvm install 20.11.0 &>/dev/null
                     nvm use 20.11.0 &>/dev/null
                     npm install
+                    npm install -g serverless
                 '''
             }
         }
