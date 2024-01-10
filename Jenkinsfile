@@ -102,14 +102,14 @@ pipeline {
             }
         }
 
-        stage('Deploy to AWS Lambda') {
-            steps {
-                sh '''#!/bin/bash
-                nvm use 20.11.0 &>/dev/null
-                serverless deploy
-                '''
-            }
-        }
+        // stage('Deploy to AWS Lambda') {
+        //     steps {
+        //         sh '''#!/bin/bash
+        //         nvm use 20.11.0 &>/dev/null
+        //         serverless deploy
+        //         '''
+        //     }
+        // }
 
         stage('Initialize Terraform') {
             steps {
