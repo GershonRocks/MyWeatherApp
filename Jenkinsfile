@@ -105,7 +105,8 @@ pipeline {
         stage('Deploy to AWS Lambda') {
             steps {
                 sh '''#!/bin/bash
-                npx serverless deploy
+                nvm use 20.11.0 &>/dev/null
+                serverless deploy
                 '''
             }
         }
